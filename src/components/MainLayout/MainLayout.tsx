@@ -9,7 +9,7 @@ const MainLayout = ({ children }: Props) => {
   return (
     <div>
       <UserButton />
-      <main className='mt-10'>{children}</main>
+      <main className='mt-20'>{children}</main>
     </div>
   );
 };

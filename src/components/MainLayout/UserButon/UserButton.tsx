@@ -25,7 +25,7 @@ const UserButton = () => {
               <img src={userIcon} className='h-8' />
             </button>
           </span>
-          <div className='opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95'>
+          <div className='opacity-0   invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95'>
             <div
               className='absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none'
               aria-labelledby='headlessui-menu-button-1'

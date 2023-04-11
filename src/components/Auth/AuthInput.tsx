@@ -41,7 +41,7 @@ function AuthInput({
           />
         </button>
       </div>
-      <div className='  w-full'>
+      <div className='w-full'>
         <input
           value={state}
           onChange={(e) => setState(e.target.value)}

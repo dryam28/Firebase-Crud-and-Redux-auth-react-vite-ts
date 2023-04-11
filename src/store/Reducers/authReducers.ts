@@ -5,6 +5,7 @@ import {
   loginWithCredentials,
   logoutFirebase,
   checkAuthSession,
+  IGatewayData,
 } from '../../firebase/services';
 import { PropsRegister } from '../../firebase/services';
 
@@ -20,6 +21,13 @@ const setIsAuthenticated = (
   action: PayloadAction<{ isAuthenticated: boolean }>
 ) => {
   state.isAuthenticated = action.payload.isAuthenticated;
+};
+
+const setUserData = (
+  state: AuthState,
+  action: PayloadAction<{ userData: IGatewayData[] }>
+) => {
+  state.userData = action.payload.userData;
 };
 
 const signUp = createAsyncThunk(
@@ -44,18 +52,19 @@ const checkUserSesion = createAsyncThunk('auth/checkSession', async () => {
 });
 
 const logout = createAsyncThunk('auth/logout', async () => {
-    const res = await logoutFirebase();
-    return res;
-  });
+  const res = await logoutFirebase();
+  return res;
+});
 
 export const reducers = {
   setEmail,
   setIsAuthenticated,
+  setUserData,
 };
 
 export const extraReducers = {
   login,
   signUp,
   checkUserSesion,
-  logout
+  logout,
 };

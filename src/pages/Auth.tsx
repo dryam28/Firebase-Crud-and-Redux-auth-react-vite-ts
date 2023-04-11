@@ -59,7 +59,9 @@ function Auth() {
                   </h2>
                 </div>
                 <div
-                  className={`mt-6 ${authError? 'opacity-1' : 'opacity-0'} text-rose-500 text-center transition`}
+                  className={`mt-6 ${
+                    authError ? 'opacity-1' : 'opacity-0'
+                  } text-rose-500 text-center transition`}
                 >
                   *{authError}*
                 </div>

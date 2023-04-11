@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { extraReducers, reducers } from '../Reducers/authReducers';
+import { IGatewayData } from '../../firebase/services';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -8,6 +9,7 @@ export interface AuthState {
   error: string | null;
   isLoading: boolean;
   isPageLoading: boolean;
+  userData: IGatewayData[] | null;
 }
 
 const initialState: AuthState = {
@@ -17,6 +19,7 @@ const initialState: AuthState = {
   error: null,
   isLoading: false,
   isPageLoading: true,
+  userData: null,
 };
 
 const { login, signUp, checkUserSesion, logout } = extraReducers;
@@ -32,9 +35,9 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.isPageLoading = false;
-        state.isAuthenticated = false
-        state.email = null
-        state.uid = null
+        state.isAuthenticated = false;
+        state.email = null;
+        state.uid = null;
       })
       .addCase(checkUserSesion.fulfilled, (state, action) => {
         state.isPageLoading = false;
@@ -43,7 +46,12 @@ const authSlice = createSlice({
           state.error = action.payload.message;
           return;
         }
+
         if (!action.payload) {
+          state.isAuthenticated = false;
+          state.email = null;
+          state.uid = null;
+          state.userData = null;
           return;
         }
         state.uid = action.payload.uid;
@@ -83,6 +91,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setEmail, setIsAuthenticated } = authSlice.actions;
+export const { setEmail, setIsAuthenticated, setUserData } = authSlice.actions;
 export { login, signUp, checkUserSesion, logout };
 export default authSlice.reducer;
