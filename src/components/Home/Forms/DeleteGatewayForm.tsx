@@ -14,8 +14,6 @@ const DeleteGatewayForm = ({
   hideForm,
   setIsLoadingData,
 }: DeleteProps) => {
-  const [error, setError] = useState('');
-  const [serialNumber, setSerialNumber] = useState('');
 
   const DeleteInfo = () => {
     let dataToDelete: string[] = [];

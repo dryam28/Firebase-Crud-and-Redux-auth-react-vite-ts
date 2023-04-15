@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../components/MainLayout/MainLayout';
 import { auth } from '../firebase/config';
 import {
@@ -10,7 +10,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../store/slices/authSilce';
 import DataTable from '../components/Home/DataTable/DataTable';
-import Modal from '../components/Modal';
+import EditGatewayModal from '../components/Home/DataTable/EditGatewayModal';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -35,13 +35,7 @@ const Home = () => {
 
   return (
     <MainLayout>
-      {/* <button onClick={() => handleClick()}>createGateway</button>
-      <br />
-      <button onClick={() => handleClick2()}>createPeripheral</button>
-      <br /> */}
-
       <DataTable />
-      {/* <Modal/> */}
     </MainLayout>
   );
 };

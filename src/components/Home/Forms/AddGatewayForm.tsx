@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { createGateway } from '../../../firebase/services';
 import { Props } from './types';
 
-const AddGatewayForm = ({ data, setRefresh, refresh }: Props) => {
+
+interface Props2 extends Props{
+  hideForm: (param: boolean) => void;
+}
+
+const AddGatewayForm = ({ data, setRefresh, refresh, hideForm}: Props2) => {
   const [serialNumber, setSerialNumber] = useState('');
   const [name, setName] = useState('');
   const [ipAddress, setipAddress] = useState('');
@@ -47,6 +52,13 @@ const AddGatewayForm = ({ data, setRefresh, refresh }: Props) => {
         >
           Submit
         </button>
+        <button
+          onClick={() => hideForm(false)}
+          className='bg-slate-500 text-white active:bg-indigo-600 text-md font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+          type='button'
+        >
+          Cancel
+        </button>
       </div>
       {error && <div className='text-center text-red-500'>{error}</div>}
       <div className='w-full flex flex-col gap-2'>
@@ -56,7 +68,7 @@ const AddGatewayForm = ({ data, setRefresh, refresh }: Props) => {
             type='text'
             value={item.state}
             onChange={(e) => item.setter(e.target.value)}
-            className='h-10 px-4 py-1 rounded-r-md border border-gray-100 text-gray-800 focus:outline-none'
+            className='h-10 px-4 py-1 rounded-r-md border border-gray-100 text-gray-800'
             placeholder={item.placeHolder}
           />
         ))}

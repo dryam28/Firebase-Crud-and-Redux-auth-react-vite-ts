@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/slices/authSilce';
 import TableHeader from './TableHeader';
 import DataTableRows from './DataTableRows';
+import EditGatewayModal from './EditGatewayModal';
 
 const DataTable = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ const DataTable = () => {
   const [addGatewayForm, setAddGatewayForm] = useState(false);
   const [deleteGatewayForm, setDeleteGatewayForm] = useState(false);
   const [updateGatewayForm, setUpdateeleteGatewayForm] = useState(false);
+  const [updateGatewayFormData, setUpdateGatewayFormData] =
+    useState<IGatewayData | null>(null);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (userData) {
@@ -86,9 +90,8 @@ const DataTable = () => {
   if (isLoadingData) {
     return (
       <div
-        className={` z-10 ${
-          !isLoadingData && 'hidden'
-        } top-0 left-0 bg-white w-full h-full flex items-center justify-center`}
+        className={` z-10 ${!isLoadingData && 'hidden'
+          } top-0 left-0 bg-white w-full h-full flex items-center justify-center`}
       >
         <img src={loadingIcon} className='h-16 animate-spin' />
       </div>
@@ -114,6 +117,7 @@ const DataTable = () => {
               data={data}
               setRefresh={setRefreshData}
               refresh={refreshData}
+              hideForm={setAddGatewayForm}
             />
           )}
           {deleteGatewayForm && (
@@ -125,15 +129,22 @@ const DataTable = () => {
               hideForm={setDeleteGatewayForm}
             />
           )}
-          {/* {updateGatewayForm && <UpdateGatewayForm data={data} setRefresh={setRefreshData} refresh={refreshData}/>}c */}
           <DataTableRows
             data={data}
             handleSelectField={handleSelectField}
             handleToggleSelectAll={handleToggleSelectAll}
             isSelectedAll={isSelectedAll}
+            setUpdateModal={setOpenModal}
+            setUpdateFormData={setUpdateGatewayFormData}
           />
         </div>
       </div>
+      <EditGatewayModal
+        open={openModal}
+        setOpen={setOpenModal}
+        setData={setUpdateGatewayFormData}
+        data={updateGatewayFormData}
+      />
     </div>
   );
 };
