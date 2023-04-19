@@ -5,7 +5,6 @@ import LoggedInRoutes from './routes/LoggedInRoutes';
 import LoggedOutRoutes from './routes/LoggedOutRoutes';
 import { checkUserSesion } from './store/slices/authSilce';
 import PageLoader from './pages/PageLoader';
-import { logoutFirebase } from './firebase/services';
 
 function App() {
   const dispatch = useDispatch();

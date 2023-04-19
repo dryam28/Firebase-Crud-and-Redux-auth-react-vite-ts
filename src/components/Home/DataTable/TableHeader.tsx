@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Props {
   handleSetForm: (arg: boolean, arg2: boolean, ar3: boolean) => void;
   addGatewayForm: boolean;
