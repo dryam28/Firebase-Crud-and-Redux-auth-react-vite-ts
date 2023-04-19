@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import loadingIcon from '../../../assets/loading-svgrepo-com.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { IGatewayData, getUserData } from '../../../firebase/services';
 import AddGatewayForm from '../Forms/AddGatewayForm';
 import DeleteGatewayForm from '../Forms/DeleteGatewayForm';
-import UpdateGatewayForm from '../Forms/UpdateGatewayForm';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/slices/authSilce';
 import TableHeader from './TableHeader';
@@ -90,8 +89,9 @@ const DataTable = () => {
   if (isLoadingData) {
     return (
       <div
-        className={` z-10 ${!isLoadingData && 'hidden'
-          } top-0 left-0 bg-white w-full h-full flex items-center justify-center`}
+        className={` z-10 ${
+          !isLoadingData && 'hidden'
+        } top-0 left-0 bg-white w-full h-full flex items-center justify-center`}
       >
         <img src={loadingIcon} className='h-16 animate-spin' />
       </div>
@@ -142,7 +142,7 @@ const DataTable = () => {
       <EditGatewayModal
         open={openModal}
         setOpen={setOpenModal}
-        setData={setUpdateGatewayFormData}
+        setRefreshData={setRefreshData}
         data={updateGatewayFormData}
       />
     </div>

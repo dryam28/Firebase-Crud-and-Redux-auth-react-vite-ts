@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import reactSvg from '../assets/react.svg';
+import { useState } from 'react';
+import musalaSoft from '../assets/download.png';
 import SubmitIcon from '../assets/submit-success-check-mark-svgrepo-com.svg';
 import loadingIcon from '../assets/loading-svgrepo-com.svg';
 import AuthInput from '../components/Auth/AuthInput';
 import { useDispatch } from 'react-redux';
-import { login, signUp } from '../store/slices/authSilce';
+import { login, signUp, setAuthError } from '../store/slices/authSilce';
 import { RootState } from '../store/store';
 import { useSelector } from 'react-redux';
 
@@ -13,10 +13,14 @@ function Auth() {
   const authError = useSelector((state: RootState) => state.auth.error);
   const authLoading = useSelector((state: RootState) => state.auth.isLoading);
   const [isloginForm, setIsloginForm] = useState(true);
-  const [email, setEmail] = useState('aracosta2810@gmail.com');
-  const [password, setPassword] = useState('12341234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async () => {
+    if (email.trim() === '' || password.trim() === '') {
+      dispatch(setAuthError({ msg: 'There can not be emty fields' }));
+      return;
+    }
     if (isloginForm) {
       dispatch(login({ email, password }));
     } else {
@@ -40,9 +44,9 @@ function Auth() {
               <div className='py-6 px-4'>
                 <div className=' flex flex-col items-center justify-center'>
                   <img
-                    src={reactSvg}
+                    src={musalaSoft}
                     loading='lazy'
-                    className='w-10'
+                    className='w-24'
                     alt='tailus logo'
                   />
                   <h2 className='mt-2 text-2xl text-cyan-900 font-bold'>

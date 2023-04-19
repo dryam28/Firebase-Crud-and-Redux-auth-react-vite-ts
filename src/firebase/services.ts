@@ -5,19 +5,12 @@ import {
 } from 'firebase/auth';
 import { auth, db } from './config';
 import {
-  getFirestore,
   collection,
   doc,
   setDoc,
   getDocs,
   deleteDoc,
-  CollectionReference,
-  DocumentData,
-  deleteField,
-  updateDoc,
 } from 'firebase/firestore';
-
-const firestore = getFirestore();
 
 export interface PropsRegister {
   email: string;
@@ -31,11 +24,11 @@ export interface IGatewayData {
   devices: IDeviceData[];
 }
 
-interface IDeviceData {
-  uid: number;
+export interface IDeviceData {
+  uid: string;
   vendor: string;
-  dateCreated: Date;
-  status: 'online' | 'offline';
+  dateCreated: string;
+  status: string;
 }
 
 export const createGateway = async (
@@ -85,25 +78,29 @@ export const deleteGateways = async (
   }
 };
 
-export const addDevice = async (
-  serialNumber: string,
-  id: string,
-  vendor: string,
-  dateCreated: Date,
-  status: 'online' | 'offline'
-): Promise<void> => {
+export const editGateway = async (
+  serialNumber: string | undefined,
+  name: string,
+  ipAddress: string,
+  devices: IDeviceData[]
+): Promise<any> => {
   const uid = auth.currentUser?.uid;
   if (!uid) {
-    throw new Error('No hay un usuario autenticado actualmente.');
-  }
+    throw new Error('There is no user authenticated');
+  } else if (!serialNumber)
+    throw new Error('You have to pass a valid serialNumber');
 
   try {
     const usersRef = collection(db, `${uid}`);
     await setDoc(doc(usersRef, `${serialNumber}`), {
-      devices: [1],
-    });
+      serialNumber,
+      name,
+      ipAddress,
+      devices,
+    } as IGatewayData);
+    return true;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

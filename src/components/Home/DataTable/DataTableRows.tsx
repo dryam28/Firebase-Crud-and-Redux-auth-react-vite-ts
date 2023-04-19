@@ -1,8 +1,5 @@
-import React from 'react';
 import eyeIcon from '../../../assets/eye-white-svgrepo-com.svg';
-import editIcon from '../../../assets/edit-svgrepo-com.svg';
 import { IGatewayData } from '../../../firebase/services';
-
 interface Props {
   data: any[];
   handleToggleSelectAll: () => void;
@@ -18,14 +15,13 @@ const DataTableRows = ({
   isSelectedAll,
   handleToggleSelectAll,
   setUpdateModal,
-  setUpdateFormData
+  setUpdateFormData,
 }: Props) => {
-
   const handleEdit = (serialNumber: string) => {
-    const tempData = data.filter(item => item.serialNumber = serialNumber)
-    setUpdateFormData(tempData[0])
-    setUpdateModal(true)
-  }
+    const tempData = data.filter((item) => item.serialNumber === serialNumber);
+    setUpdateFormData(tempData[0]);
+    setUpdateModal(true);
+  };
 
   return (
     <div className='block w-full overflow-x-auto'>

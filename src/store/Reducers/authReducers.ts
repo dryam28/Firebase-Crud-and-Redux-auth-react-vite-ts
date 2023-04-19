@@ -16,6 +16,13 @@ const setEmail = (
   state.email = action.payload.email;
 };
 
+const setAuthError = (
+  state: AuthState,
+  action: PayloadAction<{ msg: string }>
+) => {
+  state.error = action.payload.msg;
+};
+
 const setIsAuthenticated = (
   state: AuthState,
   action: PayloadAction<{ isAuthenticated: boolean }>
@@ -60,6 +67,7 @@ export const reducers = {
   setEmail,
   setIsAuthenticated,
   setUserData,
+  setAuthError,
 };
 
 export const extraReducers = {

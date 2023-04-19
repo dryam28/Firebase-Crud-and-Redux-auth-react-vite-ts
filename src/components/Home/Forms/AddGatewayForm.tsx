@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createGateway } from '../../../firebase/services';
 import { Props } from './types';
 
-
-interface Props2 extends Props{
+interface Props2 extends Props {
   hideForm: (param: boolean) => void;
 }
 
-const AddGatewayForm = ({ data, setRefresh, refresh, hideForm}: Props2) => {
+const AddGatewayForm = ({ data, setRefresh, refresh, hideForm }: Props2) => {
   const [serialNumber, setSerialNumber] = useState('');
   const [name, setName] = useState('');
   const [ipAddress, setipAddress] = useState('');

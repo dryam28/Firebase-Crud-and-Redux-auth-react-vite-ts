@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Props } from './types';
 import { deleteGateways } from '../../../firebase/services';
 
@@ -14,7 +13,6 @@ const DeleteGatewayForm = ({
   hideForm,
   setIsLoadingData,
 }: DeleteProps) => {
-
   const DeleteInfo = () => {
     let dataToDelete: string[] = [];
     let tempData = JSON.parse(JSON.stringify(data));
@@ -24,8 +22,8 @@ const DeleteGatewayForm = ({
 
     setIsLoadingData(true);
     deleteGateways(dataToDelete)
-      .then((res) => setRefresh(!refresh))
-      .catch((e) => console.log('Something went wrong'));
+      .then(() => setRefresh(!refresh))
+      .catch(() => console.log('Something went wrong'));
   };
 
   return (
